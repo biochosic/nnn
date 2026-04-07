@@ -3,158 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Епохи Розкоші: Бароко, Рококо & Готика</title>
+    <title>Енциклопедія Стилів: Готика, Бароко, Рококо</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <style>
         body {
-            transition: all 0.7s ease-in-out;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             font-family: 'Playfair Display', serif;
         }
-        h1, h2 {
+        h1, h2, h3 {
             font-family: 'Cinzel Decorative', cursive;
         }
 
-        /* Тема Бароко (Темна) */
-        .theme-baroque {
-            background-color: #2d0a0a;
-            color: #f3e5ab;
-        }
-        .theme-baroque .accent-card {
-            background-color: #3d0e0e;
-            border: 2px solid #b8860b;
-        }
+        /* Стилізація скролбару під колір теми */
+        ::-webkit-scrollbar { width: 8px; }
+        .theme-baroque::-webkit-scrollbar-thumb { background: #b8860b; }
+        .theme-rococo::-webkit-scrollbar-thumb { background: #f8bbd0; }
+        .theme-gothic::-webkit-scrollbar-thumb { background: #4a5568; }
 
-        /* Тема Рококо (Світла) */
-        .theme-rococo {
-            background-color: #fff9f0;
-            color: #5d4037;
-        }
-        .theme-rococo .accent-card {
-            background-color: #ffffff;
-            border: 2px solid #f8bbd0;
-        }
+        /* ТЕМАТИЧНІ КЛАСИ */
+        .theme-baroque { background-color: #2d0a0a; color: #f3e5ab; }
+        .theme-baroque .accent-card { background-color: #3d0e0e; border: 1px solid #b8860b; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
 
-        /* Тема Готика (Велична) */
-        .theme-gothic {
-            background-color: #1a1c2c; /* Глибокий опівнічний синій */
-            color: #d1d5db; /* Колір холодного каменю */
-        }
-        .theme-gothic .accent-card {
-            background-color: #24273d;
-            border: 2px solid #4a5568;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .theme-gothic .gold-text { color: #a0aec0; }
-        .theme-gothic .gold-border { border-color: #4a5568; }
+        .theme-rococo { background-color: #fffaf5; color: #5d4037; }
+        .theme-rococo .accent-card { background-color: #ffffff; border: 1px solid #f8bbd0; box-shadow: 0 15px 30px rgba(248,187,208,0.3); }
 
-        .gold-text { color: #d4af37; }
-        .gold-border { border-color: #d4af37; }
+        .theme-gothic { background-color: #0f111a; color: #cbd5e0; }
+        .theme-gothic .accent-card { background-color: #1a1d2e; border: 1px solid #4a5568; box-shadow: 0 0 25px rgba(74,85,104,0.4); }
+
+        .gold-text { color: #d4af37; transition: color 0.5s; }
+        .theme-gothic .gold-text { color: #818cf8; }
     </style>
 </head>
 <body class="theme-baroque min-h-screen flex flex-col">
 
-    <nav class="fixed top-0 w-full z-50 p-4 md:p-6 flex flex-col md:flex-row justify-between items-center bg-opacity-95 backdrop-blur-md border-b gold-border">
-        <div class="text-2xl font-bold tracking-widest uppercase mb-4 md:mb-0">Splendor</div>
-        <div class="flex flex-wrap justify-center gap-3">
-            <button onclick="setTheme('baroque')" class="px-5 py-2 border gold-border hover:bg-[#b8860b] hover:text-white transition rounded-full text-[10px] uppercase tracking-widest font-bold">Бароко</button>
-            <button onclick="setTheme('rococo')" class="px-5 py-2 border gold-border hover:bg-[#f8bbd0] hover:text-[#5d4037] transition rounded-full text-[10px] uppercase tracking-widest font-bold">Рококо</button>
-            <button onclick="setTheme('gothic')" class="px-5 py-2 border gold-border hover:bg-[#4a5568] hover:text-white transition rounded-full text-[10px] uppercase tracking-widest font-bold">Готика</button>
+    <nav class="fixed top-0 w-full z-50 p-4 bg-opacity-95 backdrop-blur-md border-b border-opacity-20 border-white">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <div class="text-xl font-bold tracking-[0.4em] uppercase mb-4 md:mb-0">Art History</div>
+            <div class="flex flex-wrap justify-center gap-2">
+                <button onclick="setTheme('gothic')" class="px-6 py-2 border border-current hover:bg-white hover:bg-opacity-10 transition rounded-md text-[10px] uppercase font-bold tracking-widest">1. Готика</button>
+                <button onclick="setTheme('baroque')" class="px-6 py-2 border border-current hover:bg-white hover:bg-opacity-10 transition rounded-md text-[10px] uppercase font-bold tracking-widest">2. Бароко</button>
+                <button onclick="setTheme('rococo')" class="px-6 py-2 border border-current hover:bg-white hover:bg-opacity-10 transition rounded-md text-[10px] uppercase font-bold tracking-widest">3. Рококо</button>
+            </div>
         </div>
     </nav>
 
-    <div class="flex-grow">
-        <header class="pt-40 pb-20 px-10 text-center">
-            <h1 id="main-title" class="text-5xl md:text-8xl mb-6 transition-all duration-500">Бароко</h1>
-            <p id="sub-title" class="text-xl italic max-w-3xl mx-auto opacity-80 leading-relaxed">
-                Епоха грандіозності, драматизму та божественного світла.
-            </p>
+    <div class="flex-grow pt-32 px-4 md:px-10">
+        <header class="text-center mb-16">
+            <h1 id="main-title" class="text-5xl md:text-9xl mb-6 transition-all duration-700">Бароко</h1>
+            <div id="sub-title" class="max-w-4xl mx-auto text-lg md:text-xl italic opacity-90 leading-relaxed">
+                Мистецтво ефекту, динаміки та емоційного напруження.
+            </div>
         </header>
 
-        <main class="container mx-auto px-6 grid md:grid-cols-2 gap-12 pb-20">
-            
-            <div class="accent-card p-8 rounded-lg shadow-2xl transition-all duration-500">
-                <h2 id="card-1-title" class="text-3xl mb-4 border-b gold-border pb-2">Архітектура</h2>
-                <div id="card-1-content" class="space-y-4 text-lg">
-                    <ul class="space-y-4">
-                        <li><strong class="gold-text">Бароко:</strong> Масштабні куполи, складні криволінійні плани та гра світлотіні.</li>
-                        <li><strong class="gold-text">Рококо:</strong> Відмова від симетрії, перевага надається затишним інтер'єрам та лініям "рокайль".</li>
-                    </ul>
-                </div>
+        <div class="container mx-auto grid lg:grid-cols-3 gap-8 mb-20">
+            <div class="accent-card p-8 rounded-xl transition-all">
+                <h2 class="text-2xl mb-6 font-bold border-b border-current pb-2 uppercase tracking-wide">Архітектура</h2>
+                <div id="content-arch" class="space-y-4 text-sm md:text-base">
+                    </div>
             </div>
 
-            <div class="accent-card p-8 rounded-lg shadow-2xl transition-all duration-500">
-                <h2 id="card-2-title" class="text-3xl mb-4 border-b gold-border pb-2">Філософія</h2>
-                <div id="card-2-content" class="leading-relaxed text-lg">
-                    <p>Бароко прагне вразити глядача величчю та релігійним екстазом. Це стиль палаців та соборів. 
-                    Рококо ж — це мистецтво насолоди, приватності та легковажності.</p>
-                </div>
+            <div class="accent-card p-8 rounded-xl transition-all lg:scale-105">
+                <h2 class="text-2xl mb-6 font-bold border-b border-current pb-2 uppercase tracking-wide">Мистецтво & Декор</h2>
+                <div id="content-art" class="space-y-4 text-sm md:text-base">
+                    </div>
             </div>
 
-        </main>
+            <div class="accent-card p-8 rounded-xl transition-all">
+                <h2 class="text-2xl mb-6 font-bold border-b border-current pb-2 uppercase tracking-wide">Спадщина</h2>
+                <div id="content-legacy" class="space-y-4 text-sm md:text-base">
+                    </div>
+            </div>
+        </div>
     </div>
 
-    <footer class="py-12 text-center border-t gold-border bg-black bg-opacity-20">
-        <p class="text-sm uppercase tracking-[0.3em] mb-2 opacity-60">Мистецький Альманах</p>
-        <p class="text-lg font-medium italic">By Іван Садовський</p>
+    <footer class="py-12 text-center border-t border-opacity-10 border-white bg-black bg-opacity-30">
+        <p class="text-xs uppercase tracking-[0.5em] mb-4 opacity-40">Історико-мистецький проект</p>
+        <p class="text-2xl font-serif italic tracking-wide">By Іван Садовський</p>
     </footer>
 
     <script>
+        const content = {
+            gothic: {
+                title: "Готична Архітектура",
+                subtitle: "Період: XII–XVI ст. Походження: Франція. Ідея: 'Світло — це божественність', шлях до неба.",
+                arch: `
+                    <p><b class="gold-text">Каркасна система:</b> Винахід нервюрного склепіння дозволив зняти навантаження зі стін.</p>
+                    <p><b class="gold-text">Аркбутани:</b> Зовнішні кам'яні арки, що підпирають стіни, роблячи їх тонкими та високими.</p>
+                    <p><b class="gold-text">Вертикальність:</b> Кожен елемент (пінаклі, вежі, вімперги) спрямований вгору до Бога.</p>
+                `,
+                art: `
+                    <p><b class="gold-text">Вітражі:</b> Замінили настінний живопис. Колір скла (червоний, синій) створював містичну атмосферу.</p>
+                    <p><b class="gold-text">Скульптура:</b> Статуї святих стають більш реалістичними, з'являються характерні "готичні пози".</p>
+                    <p><b class="gold-text">Химери:</b> Декоративні монстри, що символізували сили хаосу поза межами храму.</p>
+                `,
+                legacy: `
+                    <ul class="space-y-2">
+                        <li>⛪ <b>Нотр-Дам де Парі:</b> Символ французької готики.</li>
+                        <li>⛪ <b>Міланський собор:</b> "Мармуровий ліс" з тисячами статуй.</li>
+                        <li>⛪ <b>Кельнський собор:</b> Будувався понад 600 років.</li>
+                        <li>⛪ <b>Вестмінстер:</b> Місце коронації британських монархів.</li>
+                    </ul>
+                `
+            },
+            baroque: {
+                title: "Бароко",
+                subtitle: "Мистецтво величі, драми та ілюзії. Стиль королів та католицької реформації.",
+                arch: `
+                    <p><b class="gold-text">Динаміка форм:</b> Відмова від прямих ліній на користь хвилястих фасадів та овальних планів.</p>
+                    <p><b class="gold-text">Масштаб:</b> Гігантські ордери, масивні колони та величні куполи (Собор Св. Петра).</p>
+                    <p><b class="gold-text">Оптичні ілюзії:</b> Використання дзеркал та розпису стель для візуального 'відкриття' неба.</p>
+                `,
+                art: `
+                    <p><b class="gold-text">Живопис:</b> Контраст світла й тіні (К'яроскуро), динамічні пози, драматичні сюжети (Караваджо, Рубенс).</p>
+                    <p><b class="gold-text">Інтер'єр:</b> Рясна позолота, ліпнина, використання дорогого мармуру та гобеленів.</p>
+                    <p><b class="gold-text">Скульптура:</b> Берніні навчив мармур 'дихати', передаючи емоції та рух тканини.</p>
+                `,
+                legacy: `
+                    <ul class="space-y-2">
+                        <li>🏛️ <b>Версаль:</b> Еталон барокового палацово-паркового ансамблю.</li>
+                        <li>🏛️ <b>Площа Св. Петра:</b> Колонада Берніні в Римі.</li>
+                        <li>🏛️ <b>Андріївська церква:</b> Перлина бароко в Києві.</li>
+                        <li>🏛️ <b>Цвінгер:</b> Архітектурний ансамбль у Дрездені.</li>
+                    </ul>
+                `
+            },
+            rococo: {
+                title: "Рококо",
+                subtitle: "Епоха насолоди, приватності та вишуканого декору. Розквіт французьких салонів XVIII ст.",
+                arch: `
+                    <p><b class="gold-text">Інтимність:</b> Перехід від величезних залів до затишних будуарів та кабінетів.</p>
+                    <p><b class="gold-text">Рокайль:</b> Головний елемент — стилізована мушля та закручені рослинні візерунки.</p>
+                    <p><b class="gold-text">Пастельні тони:</b> Білий, рожевий, блакитний та м'ятний у поєднанні зі сріблом та золотом.</p>
+                `,
+                art: `
+                    <p><b class="gold-text">Сюжети:</b> 'Галантні свята', пасторалі, кохання, міфологічні еротичні сцени (Ватто, Фрагонар).</p>
+                    <p><b class="gold-text">Порцеляна:</b> Розквіт мануфактур (Севр, Мейсен), що створювали витончені фігурки.</p>
+                    <p><b class="gold-text">Меблі:</b> S-подібні ніжки стільців, комоди з інкрустацією деревом та бронзою.</p>
+                `,
+                legacy: `
+                    <ul class="space-y-2">
+                        <li>🌸 <b>Амалієнбург:</b> Мисливський замок у Мюнхені.</li>
+                        <li>🌸 <b>Готель Субіз:</b> Вишукані інтер'єри в Парижі.</li>
+                        <li>🌸 <b>Сан-Сусі:</b> Літній палац Фрідріха Великого в Потсдамі.</li>
+                        <li>🌸 <b>Китайський будиночок:</b> Екзотичне рококо.</li>
+                    </ul>
+                `
+            }
+        };
+
         function setTheme(theme) {
             const body = document.body;
-            const mainTitle = document.getElementById('main-title');
-            const subTitle = document.getElementById('sub-title');
-            const card1Title = document.getElementById('card-1-title');
-            const card1Content = document.getElementById('card-1-content');
-            const card2Title = document.getElementById('card-2-title');
-            const card2Content = document.getElementById('card-2-content');
-
-            // Скидаємо класи
             body.classList.remove('theme-baroque', 'theme-rococo', 'theme-gothic');
+            body.classList.add(`theme-${theme}`);
 
-            if (theme === 'baroque') {
-                body.classList.add('theme-baroque');
-                mainTitle.innerText = 'Бароко';
-                subTitle.innerText = 'Епоха грандіозності, драматизму та божественного світла.';
-                card1Title.innerText = 'Архітектура';
-                card1Content.innerHTML = `<ul class="space-y-4">
-                    <li><strong class="gold-text">Бароко:</strong> Масштабні куполи, складні криволінійні плани та гра світлотіні.</li>
-                    <li><strong class="gold-text">Рококо:</strong> Відмова від симетрії, перевага надається затишним інтер'єрам.</li>
-                </ul>`;
-                card2Title.innerText = 'Філософія';
-                card2Content.innerHTML = `<p>Бароко прагне вразити глядача величчю та релігійним екстазом. Це стиль палаців та соборів. Рококо — це мистецтво насолоди та приватності.</p>`;
-            } 
-            else if (theme === 'rococo') {
-                body.classList.add('theme-rococo');
-                mainTitle.innerText = 'Рококо';
-                subTitle.innerText = 'Світло, грація та пастельна ніжність французького аристократизму.';
-                card1Title.innerText = 'Стиль життя';
-                card1Content.innerHTML = `<p>Рококо перенесло мистецтво з величних залів у приватні будуари. Головне — це комфорт, грайливість та декоративність.</p>`;
-                card2Title.innerText = 'Деталі';
-                card2Content.innerHTML = `<p>Використання мушлеподібних орнаментів, позолоти на білому фоні та дзеркал, що візуально розширюють простір.</p>`;
-            }
-            else if (theme === 'gothic') {
-                body.classList.add('theme-gothic');
-                mainTitle.innerText = 'Готика';
-                subTitle.innerText = 'Період: XII–XVI століття. Походження: Франція. Ключова ідея: "Світло — це божественність".';
-                
-                card1Title.innerText = 'Конструкція';
-                card1Content.innerHTML = `<ul class="space-y-2 text-base">
-                    <li><strong class="gold-text">Стрілчаста арка:</strong> Дозволяла будувати значно вищі будівлі.</li>
-                    <li><strong class="gold-text">Аркбутани:</strong> Зовнішні опори для тонких стін.</li>
-                    <li><strong class="gold-text">Нервюрне склепіння:</strong> "Ребра", що роблять стелю легкою.</li>
-                    <li><strong class="gold-text">Вітражі:</strong> Наповнюють інтер’єр містичним світлом.</li>
-                </ul>`;
-                
-                card2Title.innerText = 'Шедеври';
-                card2Content.innerHTML = `<ul class="list-disc list-inside space-y-1">
-                    <li>Нотр-Дам де Парі (Франція)</li>
-                    <li>Дуомо в Мілані (Італія)</li>
-                    <li>Вестмінстерське абатство (Британія)</li>
-                    <li>Кельнський собор (Німеччина)</li>
-                </ul>`;
-            }
+            const data = content[theme];
+            document.getElementById('main-title').innerText = data.title;
+            document.getElementById('sub-title').innerText = data.subtitle;
+            document.getElementById('content-arch').innerHTML = data.arch;
+            document.getElementById('content-art').innerHTML = data.art;
+            document.getElementById('content-legacy').innerHTML = data.legacy;
+
+            // Ефект появи
+            const main = document.querySelector('main');
+            main.style.opacity = 0;
+            setTimeout(() => { main.style.opacity = 1; main.style.transition = 'opacity 0.5s'; }, 100);
         }
+
+        // Ініціалізація першої теми
+        window.onload = () => setTheme('gothic');
     </script>
 </body>
 </html>
